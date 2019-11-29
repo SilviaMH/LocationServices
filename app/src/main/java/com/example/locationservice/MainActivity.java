@@ -86,7 +86,13 @@ catch (Exception ex) {
                     PackageManager.PERMISSION_GRANTED &&
                     ActivityCompat.checkSelfPermission(this,
                             android.Manifest.permission.ACCESS_COARSE_LOCATION) !=
-                            PackageManager.PERMISSION_GRANTED) {
+                            PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this,
+                            android.Manifest.permission.WRITE_EXTERNAL_STORAGE) !=
+                            PackageManager.PERMISSION_GRANTED
+                    && ActivityCompat.checkSelfPermission(this,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE) !=
+                    PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
@@ -97,7 +103,9 @@ catch (Exception ex) {
                 requestPermissions(new String[] {
                         android.Manifest.permission.ACCESS_FINE_LOCATION,
                         android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                        android.Manifest.permission.INTERNET
+                        android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        android.Manifest.permission.INTERNET,
+                        android.Manifest.permission.READ_EXTERNAL_STORAGE
                 }, 10);
             }
         }
@@ -122,30 +130,5 @@ catch (Exception ex) {
                 return;
         }
     }
-
-//    @Override
-//    public void onClick(View view) {
-//        int newTimeUpdateLocation;
-//        float newDistanceUpdateLocation;
-//        try {
-//            newTimeUpdateLocation = Integer.parseInt(((EditText)findViewById(R.id.editTextTime)).getText().toString());
-//            newDistanceUpdateLocation = Float.parseFloat(((EditText)findViewById(R.id.editTextDistance)).getText().toString());
-//        } catch (NumberFormatException e) {
-//            Toast toast2 = Toast.makeText(getApplicationContext(),
-//                    "Ingrese un valor numérico válido.", Toast.LENGTH_SHORT);
-//            toast2.setGravity(Gravity.BOTTOM|Gravity.CENTER,0,0);
-//            toast2.show();
-//            return;
-//        }
-//
-//        if(newTimeUpdateLocation != timeUpdateLocation || newDistanceUpdateLocation != distanceUpateLocation) {
-//            timeUpdateLocation = newTimeUpdateLocation;
-//            distanceUpateLocation = newDistanceUpdateLocation;
-//            locationManager.removeUpdates(this);
-//            //Log.e("removeUpdates", LocationManager.GPS_PROVIDER);
-//            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-//                    timeUpdateLocation, distanceUpateLocation, this);
-//        }
-//    }
 }
 

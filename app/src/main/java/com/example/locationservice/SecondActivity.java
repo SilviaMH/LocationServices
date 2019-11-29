@@ -29,7 +29,7 @@ public class SecondActivity extends AppCompatActivity implements
         ArrayList params = getIntent().getStringArrayListExtra("parametros");
         time = Integer.parseInt(params.get(0).toString());
         distance = Float.parseFloat(params.get(1).toString());
-        locationPrinter = new LocationPrinter(this, new LocationPrinterParameters(time, distance, "ActivityLocation"));
+        locationPrinter = new LocationPrinter(this, new LocationPrinterParameters(time, distance, "RastreoActividad"));
 
         try {
             locationPrinter.execute();

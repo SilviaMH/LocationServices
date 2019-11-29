@@ -35,7 +35,6 @@ public class ServiceLocation extends Service {
 
     @Override
     public void onDestroy() {
-        Toast.makeText(this, "Service done", Toast.LENGTH_SHORT).show();
         Log.d("onDestroy", "Invocación método onDestroy");
     }
 
@@ -58,12 +57,12 @@ public class ServiceLocation extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Toast.makeText(this, "Service starting", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Iniciando servicio...", Toast.LENGTH_SHORT).show();
 
         ArrayList params = intent.getStringArrayListExtra("parametros");
         time = Integer.parseInt(params.get(0).toString());
         distance = Float.parseFloat(params.get(1).toString());
-        locationPrinter = new LocationPrinter(this, new LocationPrinterParameters(time, distance, "ActivityLocation"));
+        locationPrinter = new LocationPrinter(this, new LocationPrinterParameters(time, distance, "RastreoActividad"));
         locationPrinter.execute();
         // For each start request, send a message to start a job and deliver the
         // start ID so we know which request we're stopping when we finish the job
@@ -102,7 +101,7 @@ public class ServiceLocation extends Service {
             try {
                 Log.d("handleMessage", "Ejecutando servicio:" + msg.arg1);
                 handlerDisplay.post(new DisplayToast(getApplicationContext(),
-                        "Ejecutando servicio..."));
+                        "Guardando la ubicación en RastreoActividad.csv"));
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
                 // Restore interrupt status.

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Gravity;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -17,7 +18,7 @@ import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class IntentServiceLocation  extends IntentService {
 
-    private static final String ACTION_LOCATION = "Locating";
+    private static final String ACTION_LOCATION = "Rastreando...";
     private static String timeDataParam;
     private static String distanceDataParam;
     Handler handlerDisplay;
@@ -48,11 +49,6 @@ public class IntentServiceLocation  extends IntentService {
             this.distanceDataParam = distance;
             Intent intent = new Intent(context, IntentServiceLocation.class);
             intent.setAction(ACTION_LOCATION);
-            /*
-            ArrayList params = intent.getStringArrayListExtra("parametros");
-            intent.putExtra(latitudeDataParam, Integer.parseInt(params.get(0).toString()));
-            intent.putExtra(longitudeDataParam, Integer.parseInt(params.get(0).toString()));
-            */
 
             context.startService(intent);
         }
@@ -67,19 +63,16 @@ public class IntentServiceLocation  extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null){
-            String message = "Locating...";
+            String message = "Rastreando...";
             Log.d("onHandleIntent", "Location on Log...");
-            handlerDisplay.post(new DisplayToast(this, "Locating..."));
+            handlerDisplay.post(new DisplayToast(this, "Rastreando..."));
             Toast.makeText(getApplicationContext(), message,
                     Toast.LENGTH_LONG).show();
             final String action = intent.getAction();
             if (ACTION_LOCATION.equals(action)) {
-
                 handleActionLocation(timeDataParam, distanceDataParam);
-
             }
         }
-
 
     }
 
@@ -89,24 +82,17 @@ public class IntentServiceLocation  extends IntentService {
                 Log.d("handleActionLocation", "time:" + time + " distance:" + distance);
                 try {
                     Thread.sleep(5000);
-                    locationPrinter = new LocationPrinter(this, new LocationPrinterParameters(time, distance, "ActivityLocation"));
+                    locationPrinter = new LocationPrinter(this, new LocationPrinterParameters(time, distance, "RastreoActividad"));
 
                     locationPrinter.execute();
                     Thread.sleep(5000);
-                    handlerDisplay.post(new DisplayToast(this,"Located"));
+                    handlerDisplay.post(new DisplayToast(this,"Guardando ubicación en RastreoActividad.csv"));
 
                 } catch (Exception e) {
                     Thread.currentThread().interrupt();
                     locationPrinter.cancel(true);
-                    Log.d("Something wrong occur",e.toString());
+                    Log.d("Something wrong occured",e.toString());
                 }
-
-                //TODO: Ensure animation
-/*
-        ImageView loading = findViewById(R.id.imageView );
-        animation = (AnimationDrawable) loading.getDrawable();
-        animation.start();
-*/
 
             }
 }

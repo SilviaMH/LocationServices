@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ServiceLocationNtwrk</string>
+    <string name="app_name">LocationServices</string>
     <string name="buttonActivity_Text">Activity</string>
     <string name="buttonThreadService_Text">Service</string>
     <string name="buttonIntentService_Text">Intent Service</string>
@@ -10,4 +10,6 @@
     <string name="timeUnit_TextView">ms</string>
     <string name="distanceUnit_TextView">m</string>
     <string name="buttonRegresar_Text">Regresar</string>
+    <string name="textViewParams_Text">Ingrese el intervalo de tiempo y distancia mínima con la que desea actualizar su ubicación. Los datos de rastreo se almacenan en el archivo RastreoActividad.csv.</string>
+    <string name="textViewRastreando_Text">Rastreando ubicación...</string>
 </resources>
