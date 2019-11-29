@@ -1,2 +1,3 @@
 # GpsAndroid
-Show several types to track by GPS
+
+Obtiene la ubicación del usuario mediante servicios.
